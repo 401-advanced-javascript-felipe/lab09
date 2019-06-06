@@ -26,7 +26,10 @@ app.use(morgan('dev'));
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+
 app.use(express.static('docs'));
+require('../docs/config/swagger');
+
 // Routes
 app.use(v1Router);
 
