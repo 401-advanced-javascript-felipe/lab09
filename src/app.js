@@ -26,7 +26,10 @@ app.use(morgan('dev'));
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+
 app.use(express.static('docs'));
+require('../docs/config/swagger');
+
 // Routes
 app.use(v1Router);
 
@@ -36,12 +39,12 @@ app.use(errorHandler);
 
 /**
  * @type {Object}
- * @param {*} port 
+ * @param {*} port
  */
 let start = (port = process.env.PORT) => {
   app.listen(port, () => {
     console.log(`Server Up on ${port}`);
   });
 };
-  
+
 module.exports = {app,start};
