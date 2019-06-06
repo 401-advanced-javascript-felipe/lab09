@@ -34,7 +34,10 @@ app.use(v1Router);
 app.use(notFound);
 app.use(errorHandler);
 
-
+/**
+ * @type {Object}
+ * @param {*} port 
+ */
 let start = (port = process.env.PORT) => {
   app.listen(port, () => {
     console.log(`Server Up on ${port}`);
