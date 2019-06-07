@@ -11,4 +11,4 @@
 * [Swagger](https://desolate-peak-85056.herokuapp.com/api-docs)
 
 
-![pic](assets\UML.PNG)
+![pic](./assets\UML.PNG)
