@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: app.js</title>
+    <title>JSDoc: Source: middleware/500.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: app.js</h1>
+    <h1 class="page-title">Source: middleware/500.js</h1>
 
     
 
@@ -29,55 +29,16 @@
             <pre class="prettyprint source linenums"><code>'use strict';
 
 /**
- * API Server Module
- * @module src/app
- */
-
-const cwd = process.cwd();
-
-// 3rd Party Resources
-const express = require('express');
-const cors = require('cors');
-const morgan = require('morgan');
-
-// Esoteric Resources
-const errorHandler = require( `${cwd}/src/middleware/500.js`);
-const notFound = require( `${cwd}/src/middleware/404.js` );
-const v1Router = require( `${cwd}/src/api/v1.js` );
-
-// Prepare the express app
-const app = express();
-
-// App Level MW
-app.use(cors());
-app.use(morgan('dev'));
-
-app.use(express.json());
-app.use(express.urlencoded({extended:true}));
-
-app.use(express.static('docs'));
-const options = require('../docs/config/swagger');
-const expressSwagger = require('express-swagger-generator')(app);
-expressSwagger(options);
-
-// Routes
-app.use(v1Router);
-
-// Catchalls
-app.use(notFound);
-app.use(errorHandler);
-
-/**
- * @type {Object}
- * @param {*} port
- */
-let start = (port = process.env.PORT) => {
-  app.listen(port, () => {
-    console.log(`Server Up on ${port}`);
-  });
+   * @module 500
+   * @param {object} err - err object for request
+   * @param {object} req - request object
+   * @param {object} res - response object
+   * @desc server catch all route handler
+   */
+module.exports = (err, req, res, next) => {
+  let error = { error: err };
+  res.status(500).json(error).end();
 };
-
-module.exports = {app,start};
 </code></pre>
         </article>
     </section>
